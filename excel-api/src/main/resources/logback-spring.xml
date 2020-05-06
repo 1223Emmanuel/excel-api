@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+ 
+    <property name="LOGS" value="./logs" />
+ 
+    <appender name="Console"
+        class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d [%p] %C{1.} [%t] %m%n</Pattern>
+        </layout>
+    </appender>
+    
+    <appender name="DateRollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${jboss.server.log.dir}/siac-api/siac-api.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d [%p] %C{1.} [%t] %m%n</Pattern>
+        </encoder>
+ 
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${jboss.server.log.dir}/siac-api/archived/siac-api-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>20</maxHistory>
+        	<totalSizeCap>10MB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+     
+    <root level="info">
+        <appender-ref ref="DateRollingFile" />
+        <appender-ref ref="Console" />
+    </root>
+ 
+    <logger name="com.eglobal.bo.siac.api" level="info" additivity="false">
+        <appender-ref ref="DateRollingFile" />
+        <appender-ref ref="Console" />
+    </logger>
+ 
+</configuration>
