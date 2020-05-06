@@ -16,6 +16,7 @@ public class ClientTimeOut {
 	    //Read timeout
 	    clientHttpRequestFactory.setReadTimeout(10_000);
 	    return clientHttpRequestFactory;
+	    
 	}
 }
 
